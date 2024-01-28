@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+"""This is the province class"""
+from sqlalchemy import Column, String
+from models.base_model import BaseModel, Base
+
+
+class Province(BaseModel, Base):
+    """This is the class for Province
+    Attributes:
+        name: name of province
+    """
+    __tablename__ = "provinces"
+    name = Column(String(128), nullable=False)
