@@ -1,24 +1,17 @@
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
+/* Additional styles */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header styles */
 .hero {
-    background-image: url('frames-for-your-heart-mR1CIDduGLc-unsplash.jpg');
+    background-image: url('images/pexels-expect-best-323780.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
     text-align: center;
-    padding: 100px 0;
+    padding: 180px 20px; /* Reverted to previous padding */
 }
 
 .hero h1 {
@@ -33,77 +26,66 @@ body {
 
 .btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: #007bff;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .btn:hover {
     background-color: #0056b3;
 }
 
-/* Section styles */
-.about-section,
-.featured-listings,
-.testimonials {
-    padding: 50px 0;
-}
-
-.about-section h2,
-.featured-listings h2,
-.testimonials h2 {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Footer styles */
 .footer {
     background-color: #f8f9fa;
     padding: 20px 0;
     text-align: center;
 }
 
-/* Form styles */
-form {
-    width: 50%;
-    margin: 0 auto;
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
 }
 
+/* Additional styles for preference settings */
 label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 input[type="text"],
-input[type="number"],
-textarea {
+select {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .hero {
+        padding: 150px 20px; /* Adjusted padding for smaller screens */
     }
 }

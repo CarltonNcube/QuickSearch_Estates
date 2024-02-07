@@ -7,71 +7,82 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Welcome to QuickSearch Estates</h1>
-            <p>Find your dream property with ease</p>
-            <a href="/search" class="btn btn-primary">Get Started</a>
-        </div>
-    </header>
-
-    <section class="property-listing-form">
+    <!-- Navigation bar -->
+    <nav class="navbar">
         <div class="container">
-            <h2>Property Listing Form</h2>
-            <form id="propertyForm">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required><br><br>
+            <a href="#" class="navbar-brand">QuickSearch Estates</a>
+            <ul class="navbar-menu">
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/signin">Sign In</a></li>
+                <li><a href="#signup">Sign Up</a></li> <!-- Updated link to include the #signup anchor -->
+            </ul>
+        </div>
+    </nav>
 
-                <label for="description">Description:</label><br>
-                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to QuickSearch Estates</h1>
+            <p>Find your dream home with ease</p>
+            <a href="/search" class="btn">Start Searching</a>
+        </div>
+    </section>
 
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" required><br><br>
+    <!-- About section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>QuickSearch Estates is a leading platform for buying and selling properties. We provide innovative solutions to simplify the real estate process for everyone.</p>
+        </div>
+    </section>
 
-                <label for="location">Location:</label>
-                <input type="text" id="location" name="location" required><br><br>
+    <!-- Contact section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or inquiries, feel free to contact us at <a href="mailto:info@quicksearchestates.com">info@quicksearchestates.com</a>.</p>
+        </div>
+    </section>
 
-                <button type="submit">Submit</button>
+    <!-- Sign In section -->
+    <section id="signin" class="section">
+        <div class="container">
+            <h2>Sign In</h2>
+            <form action="/signin" method="POST" class="form">
+                <!-- Sign in form fields -->
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn">Sign In</button>
             </form>
         </div>
     </section>
 
-    <section class="about-section">
+    <!-- Sign Up section -->
+    <section id="signup" class="section">
         <div class="container">
-            <h2>About Us</h2>
-            <p>Are you ready to embark on an exciting journey towards your dream home? Whether you're a first-time buyer stepping into the world of homeownership, a seller seeking a fair price for your cherished property, or a real estate company scouting for prime opportunities, we're here to guide you every step of the way. </p>
-	    <p1>For Buyers:
-Discover the perfect blend of comfort, style, and functionality as you explore our diverse range of properties. From cozy starter homes to luxurious estates, each listing offers a unique opportunity to find the place you'll proudly call "home." Let us help you navigate the intricacies of the buying process and turn your homeownership dreams into reality. </p1>
-	    <p2>For Sellers:
-Your home holds a lifetime of memories, and we understand its true value. Our dedicated team of professionals is committed to showcasing your property in its best light and securing a fair price that reflects its worth. With our strategic marketing approach and personalized attention, we'll attract the right buyers and maximize your property's potential. </p2>
-	    <p3>For Real Estate Companies:
-In the dynamic world of real estate, finding the perfect properties to buy and sell is essential for success. Partner with us to gain access to a curated selection of listings tailored to your investment goals. Whether you're expanding your portfolio or seeking lucrative opportunities, our comprehensive market insights and industry expertise will empower you to make informed decisions and achieve your objectives. </p3>
-	    <p4>At QuickSearch Estate, we're more than just a brokerage—we're your trusted partners in the journey towards homeownership, investment success, and fulfilling real estate transactions. Let's work together to make your dreams a reality.</p4>
-	    <p5>Welcome home!!!</p5>
+            <h2>Sign Up</h2>
+            <form action="/signup" method="POST" class="form">
+                <!-- Sign up form fields -->
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
         </div>
     </section>
 
-    <section class="featured-listings">
-        <div class="container">
-            <h2>Featured Listings</h2>
-            <!-- Add logic to display featured property listings -->
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <h2>Client Testimonials</h2>
-            <!-- Add logic to display client testimonials -->
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 QuickSearch Estates. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Link to your JavaScript file -->
+    <!-- Anchor tag for scrolling to the bottom of the page -->
+    <a id="signup"></a>
+
+    <!-- Script for form validation -->
     <script src="script.js"></script>
 </body>
 </html>

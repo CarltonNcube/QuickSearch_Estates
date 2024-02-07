@@ -1,32 +1,72 @@
-console.log('Script loaded!');
+// Function to handle sign up form submission
 
-document.getElementById('propertyForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+const signUpForm = document.querySelector('#signUpForm');
+signUpForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    const formData = new FormData(this);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
+    // Get form data
+    const formData = new FormData(signUpForm);
 
-    fetch('/api/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
+    try {
+        // Send POST request to backend API endpoint for sign up
+        const response = await fetch('/api/signup', {
+            method: 'POST',
+            body: formData
+        });
+
+        // Check if request was successful
         if (response.ok) {
-            alert('Property details submitted successfully!');
-            // Optionally, redirect to another page after successful submission
-            window.location.href = '/success.html';
+            // Redirect user to dashboard or another page upon successful sign up
+            window.location.href = '/dashboard';
         } else {
-            alert('Failed to submit property details. Please try again.');
+            // Display error message if sign up failed
+            const errorMessage = await response.text();
+            alert(errorMessage);
         }
-    })
-    .catch(error => {
+    } catch (error) {
+        // Handle any errors that occurred during the fetch operation
         console.error('Error:', error);
-        alert('An error occurred. Please try again later.');
-    });
+        alert('An unexpected error occurred. Please try again later.');
+    }
 });
+
+// Function to handle property search form submission
+const propertySearchForm = document.querySelector('#propertySearchForm');
+propertySearchForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Get form data
+    const formData = new FormData(propertySearchForm);
+
+    try {
+        // Send POST request to backend API endpoint for property search
+        const response = await fetch('/api/properties/search', {
+            method: 'POST',
+            body: formData
+        });
+
+        // Check if request was successful
+        if (response.ok) {
+            // Parse response JSON
+            const properties = await response.json();
+
+            // Display search results on the page (e.g., populate a list with property details)
+            displaySearchResults(properties);
+        } else {
+            // Display error message if property search failed
+            const errorMessage = await response.text();
+            alert(errorMessage);
+        }
+    } catch (error) {
+        // Handle any errors that occurred during the fetch operation
+        console.error('Error:', error);
+        alert('An unexpected error occurred. Please try again later.');
+    }
+});
+
+// Function to display search results on the page
+function displaySearchResults(properties) {
+    // Implement logic to display search results (e.g., populate a list with property details)
+    console.log(properties);
+}
+

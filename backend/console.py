@@ -3,27 +3,22 @@
 
 import cmd
 from sqlalchemy.orm import sessionmaker
-from models.property import Property
-from models.user import User
-from models.place import Place
-from models.review import Review
-from models.security import Security
-from models.amenity import Amenity
-from models.county import County
-from models.city import City
-from models.province import Province
-from models import db_session
+from models import *
 
+# Define the classes dictionary
 classes = {
-    "Property": Property,
     "User": User,
-    "Place": Place,
-    "Review": Review,
-    "Security": Security,
-    "Amenity": Amenity,
-    "County": County,
     "City": City,
-    "Province": Province
+    "County": County,
+    "Province": Province,
+    "State": State,
+    "Continent": Continent,
+    "Suburb": Suburb,
+    "Property": Property,
+    "Review": Review,
+    "Amenity": Amenity,
+    "Place": Place,
+    "Preference": Preference
 }
 
 class QuickSearchConsole(cmd.Cmd):
@@ -149,3 +144,4 @@ class QuickSearchConsole(cmd.Cmd):
 
 if __name__ == '__main__':
     QuickSearchConsole().cmdloop()
+
