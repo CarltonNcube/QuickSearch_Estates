@@ -20,8 +20,9 @@
 name: Build and deploy Python app to Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: Quicksearch_Estates  
-  PYTHON_VERSION: '3.8'              
+  AZURE_WEBAPP_NAME: Quicksearch_Estates  # set this to the name of your Azure Web App
+  PYTHON_VERSION: '3.8'              # set this to the Python version to use
+
 on:
   push:
     branches: [ "master" ]
@@ -34,11 +35,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        shell: bash -l {0}
+
     steps:
-      - uses: actions/checkout@v2  # Update to the latest version
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
 
       - name: Set up Python version
-        uses: actions/setup-python@v2  # Update to the latest version
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
@@ -55,7 +67,7 @@ jobs:
         run: pytest  # Replace with your test command
 
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v2  # Update to the latest version
+        uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
@@ -73,7 +85,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2  # Update to the latest version
+        uses: actions/download-artifact@v2
         with:
           name: python-app
           path: .
