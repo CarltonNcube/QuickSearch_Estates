@@ -1,5 +1,4 @@
 // Function to handle sign up form submission
-
 const signUpForm = document.querySelector('#signUpForm');
 signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -69,4 +68,26 @@ function displaySearchResults(properties) {
     // Implement logic to display search results (e.g., populate a list with property details)
     console.log(properties);
 }
+
+// Function to fetch data from the backend API endpoint
+function fetchData() {
+    fetch('http://quicksearchestates.wuaze.com/api/data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle data received from the backend
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error:', error);
+        });
+}
+
+// Call the fetchData function to initiate the request
+fetchData();
 
