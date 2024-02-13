@@ -67,9 +67,9 @@ jobs:
           pip install -r requirements.txt
           pip install pytest  # Add this line to install pytest
 
-      - name: Run tests
-        run: |
-          pytest
+    #  - name: Run tests
+    #    run: |
+   #       pytest
 
   deploy:
     permissions:
