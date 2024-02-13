@@ -1,5 +1,7 @@
+#!/usr/bin/python3
+
 import unittest
-from backend.models import (
+from backend.models.models import (
     City,
     County,
     Province,
