@@ -43,8 +43,6 @@ class TestCityModel(unittest.TestCase):
             city = City(name="New York", state_id=None)
 
    
-
-
 class TestCountyModel(unittest.TestCase):
     def test_county_creation(self):
         # Test county creation with valid data
@@ -162,7 +160,7 @@ class TestSuburbModel(unittest.TestCase):
         self.assertEqual(suburb.name, "Suburbia")
         self.assertEqual(suburb.city_id, "12345")
 
-     def test_suburb_creation_invalid_data(self):
+    def test_suburb_creation_invalid_data(self):
         # Test suburb creation with invalid data
         with self.assertRaises(ValueError):
             suburb = Suburb(name=None)
