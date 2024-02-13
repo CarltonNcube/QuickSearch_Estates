@@ -1,5 +1,7 @@
+#!/usr/bin/python3
+
 import unittest
-from controllers.user_controller import create_user, update_user, delete_user, get_user
+from backend.controllers.user_controller import create_user, update_user, delete_user, get_user
 
 class TestUserController(unittest.TestCase):
     def test_create_user(self):

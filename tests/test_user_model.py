@@ -1,5 +1,7 @@
+#!/usr/bin/python3
+
 import unittest
-from models import User
+from backend.models import User
 
 class TestUserModel(unittest.TestCase):
     def test_create_user(self):

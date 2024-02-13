@@ -3,7 +3,7 @@
 from unittest.mock import patch
 from io import StringIO
 import pytest
-from console import QuickSearchConsole
+from backend.console import QuickSearchConsole
 
 # Mocking the SQLAlchemy session for testing
 @patch("console.db_session")
