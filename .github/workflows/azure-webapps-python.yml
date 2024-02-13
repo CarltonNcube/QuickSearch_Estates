@@ -20,8 +20,8 @@
 name: Build and deploy Python app to Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: Quicksearch_Estates
-  PYTHON_VERSION: '3.8'
+  AZURE_WEBAPP_NAME: Quicksearch_Estates  # set this to the name of your Azure Web App
+  PYTHON_VERSION: '3.8'              # set this to the Python version to use
 
 on:
   push:
@@ -67,8 +67,11 @@ jobs:
         with:
           name: python-app
           path: .
+          if-no-files-found: error
+          retention-days: 7
           exclude: |
             venv/
+            .git/
 
   deploy:
     permissions:
