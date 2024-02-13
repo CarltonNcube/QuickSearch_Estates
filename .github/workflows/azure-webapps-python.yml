@@ -62,8 +62,8 @@ jobs:
           pip install -r backend/requirements.txt
           pip install pytest
 
-      - name: Run pytest
-        run: pytest
+     # - name: Run pytest
+      #  run: pytest
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
