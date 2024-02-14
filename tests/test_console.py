@@ -3,7 +3,7 @@
 from unittest.mock import patch
 from io import StringIO
 import pytest
-from backend.console import QuickSearchConsole
+from backend import console
 
 # Mocking the SQLAlchemy session for testing
 @patch("console.db_session")
@@ -154,7 +154,4 @@ def test_invalid_all(mock_db_session):
     with patch('sys.stdout', output):
         console.onecmd("all")
     assert "*** Unknown class name ***" in output.getvalue()
-
-if __name__ == "__main__":
-    pytest.main()
 
