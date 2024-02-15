@@ -20,9 +20,34 @@ jobs:
 
       - name: Build and deploy
         run: |
-          cd QuickSearch_Estates  # Change directory to QuickSearch_Estates
           npm install  # Or any build commands you need
           npm run build  # Or any build commands you need
           npx gh-pages -d dist  # Or the directory where your static files are generated
         env:
           NODE_ENV: production
+        working-directory: ./QuickSearch_Estates
+
+  register_app:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register GitHub App
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: app } = await github.apps.create({
+              name: 'QuickSearch_Estates',
+              description: 'GitHub App for deploying static content to GitHub Pages',
+              homepage_url: 'https://github.com/CarltonNcube/QuickSearch_Estates',
+              redirect_uris: ['https://github.com/CarltonNcube/QuickSearch_Estates/callback'],
+              external_url: 'https://github.com/CarltonNcube/QuickSearch_Estates',
+              default_permissions: {
+                contents: 'read',
+                pages: 'write',
+                id_token: 'write'
+              },
+              installation_target_type: 'all',
+              events: ['repository']
+            });
+            console.log(`GitHub App registered. App ID: ${app.id}`);
