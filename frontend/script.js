@@ -8,7 +8,7 @@ signUpForm.addEventListener('submit', async (e) => {
 
     try {
         // Send POST request to backend API endpoint for sign up
-        const response = await fetch('/api/signup', {
+        const response = await fetch('https://quicksearchestates.github.io/api/signup', {
             method: 'POST',
             body: formData
         });
@@ -16,7 +16,7 @@ signUpForm.addEventListener('submit', async (e) => {
         // Check if request was successful
         if (response.ok) {
             // Redirect user to dashboard or another page upon successful sign up
-            window.location.href = '/dashboard';
+            window.location.href = 'https://quicksearchestates.github.io/dashboard';
         } else {
             // Display error message if sign up failed
             const errorMessage = await response.text();
@@ -39,7 +39,7 @@ propertySearchForm.addEventListener('submit', async (e) => {
 
     try {
         // Send POST request to backend API endpoint for property search
-        const response = await fetch('/api/properties/search', {
+        const response = await fetch('https://quicksearchestates.github.io/api/properties/search', {
             method: 'POST',
             body: formData
         });
@@ -68,26 +68,4 @@ function displaySearchResults(properties) {
     // Implement logic to display search results (e.g., populate a list with property details)
     console.log(properties);
 }
-
-// Function to fetch data from the backend API endpoint
-function fetchData() {
-    fetch('http://quicksearchestates.wuaze.com/api/data')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle data received from the backend
-            console.log(data);
-        })
-        .catch(error => {
-            // Handle errors
-            console.error('Error:', error);
-        });
-}
-
-// Call the fetchData function to initiate the request
-fetchData();
 
