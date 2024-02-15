@@ -4,18 +4,50 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
-      - name: Build and deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # Change to the branch you want to deploy to (usually 'gh-pages')
-          FOLDER: . # Change to the folder containing your static content (usually '.')
+          node-version: '14'
+
+      - name: Build and deploy
+        run: |
+          npm install  # Or any build commands you need
+          npm run build  # Or any build commands you need
+          npx gh-pages -d dist  # Or the directory where your static files are generated
+        env:
+          NODE_ENV: production
+        working-directory: ./QuickSearch_Estates
+
+  register_app:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Register GitHub App
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: app } = await github.apps.create({
+              name: 'QuickSearch_Estates',
+              description: 'GitHub App for deploying static content to GitHub Pages',
+              homepage_url: 'https://github.com/CarltonNcube/QuickSearch_Estates',
+              redirect_uris: ['https://github.com/CarltonNcube/QuickSearch_Estates/callback'],
+              external_url: 'https://github.com/CarltonNcube/QuickSearch_Estates',
+              default_permissions: {
+                contents: 'read',
+                pages: 'write',
+                id_token: 'write'
+              },
+              installation_target_type: 'all',
+              events: ['repository']
+            });
+            console.log(`GitHub App registered. App ID: ${app.id}`);
