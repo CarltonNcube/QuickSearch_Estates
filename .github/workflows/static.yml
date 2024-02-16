@@ -28,10 +28,9 @@ jobs:
           cd frontend
           npm install
           npm run build
-          npx gh-pages -d dist
-        env:
-          NODE_ENV: production
-
+          git remote set-url origin git@github.com:CarltonNcube/QuickSearch_Estates.git
+          git push origin master:master
+          
   register_app:
     needs: deploy
     runs-on: ubuntu-latest
