@@ -20,10 +20,9 @@ jobs:
 
       - name: Build and deploy
         run: |
-          cd frontend
           npm install
           npm run build
-          npx gh-pages -d dist
+          npx gh-pages -d frontend/dist
         env:
           NODE_ENV: production
 
