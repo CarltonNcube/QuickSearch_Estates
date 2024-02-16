@@ -1,11 +1,5 @@
-// Function to handle sign up form submission
-const signUpForm = document.querySelector('#signUpForm');
-signUpForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Get form data
-    const formData = new FormData(signUpForm);
-
+// Simulated form submission function
+async function submitSignUpForm(formData) {
     try {
         // Send POST request to backend API endpoint for sign up
         const response = await fetch('https://quicksearchestates.github.io/api/signup', {
@@ -16,27 +10,20 @@ signUpForm.addEventListener('submit', async (e) => {
         // Check if request was successful
         if (response.ok) {
             // Redirect user to dashboard or another page upon successful sign up
-            window.location.href = 'https://quicksearchestates.github.io/dashboard';
+            console.log('Sign up successful!');
         } else {
             // Display error message if sign up failed
             const errorMessage = await response.text();
-            alert(errorMessage);
+            console.error(errorMessage);
         }
     } catch (error) {
         // Handle any errors that occurred during the fetch operation
         console.error('Error:', error);
-        alert('An unexpected error occurred. Please try again later.');
     }
-});
+}
 
-// Function to handle property search form submission
-const propertySearchForm = document.querySelector('#propertySearchForm');
-propertySearchForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Get form data
-    const formData = new FormData(propertySearchForm);
-
+// Simulated property search function
+async function searchProperties(formData) {
     try {
         // Send POST request to backend API endpoint for property search
         const response = await fetch('https://quicksearchestates.github.io/api/properties/search', {
@@ -54,18 +41,32 @@ propertySearchForm.addEventListener('submit', async (e) => {
         } else {
             // Display error message if property search failed
             const errorMessage = await response.text();
-            alert(errorMessage);
+            console.error(errorMessage);
         }
     } catch (error) {
         // Handle any errors that occurred during the fetch operation
         console.error('Error:', error);
-        alert('An unexpected error occurred. Please try again later.');
     }
-});
+}
 
-// Function to display search results on the page
+// Simulated function to display search results on the page
 function displaySearchResults(properties) {
     // Implement logic to display search results (e.g., populate a list with property details)
     console.log(properties);
 }
+
+// Simulated form data
+const signUpFormData = new FormData();
+signUpFormData.append('email', 'test@example.com');
+signUpFormData.append('password', 'password123');
+
+// Simulate form submission
+submitSignUpForm(signUpFormData);
+
+// Simulated property search form data
+const propertySearchFormData = new FormData();
+propertySearchFormData.append('searchQuery', 'house');
+
+// Simulate property search
+searchProperties(propertySearchFormData);
 
