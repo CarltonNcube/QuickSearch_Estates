@@ -18,11 +18,17 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "carltonncube@outlook.com"
+          git config --global user.name "CarltonNcube"
+      
       - name: Build and deploy
         run: |
+          cd frontend
           npm install
           npm run build
-          npx gh-pages -d frontend/dist
+          npx gh-pages -d dist
         env:
           NODE_ENV: production
 
