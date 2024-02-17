@@ -69,8 +69,17 @@ jobs:
           compression-level: 6
           overwrite: false
 
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: QuickSearch_Estates
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          slot-name: production
+          package: artifacts/python-app.tar.gz
+        env:
+          pythonLocation: /opt/hostedtoolcache/Python/3.8.18/x64
+          LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.8.18/x64/lib
