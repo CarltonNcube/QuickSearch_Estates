@@ -50,8 +50,9 @@ jobs:
       - name: Copy necessary files to artifact directory
         run: |
           cp -r backend artifacts/python-app/backend
-          cp -r other_directory artifacts/python-app/other_directory
-          # Repeat the above line for any other directories/files you want to include
+          if [ -d "other_directory" ]; then
+            cp -r other_directory artifacts/python-app/other_directory
+          fi
 
       - name: Archive artifact
         run: |
