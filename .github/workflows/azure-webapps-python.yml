@@ -80,6 +80,7 @@ jobs:
           app-name: QuickSearch_Estates
           slot-name: production
           package: artifacts/python-app.tar.gz
+          subscription-id: f82595b3-47a0-49a2-8e87-b1e0f2e2f999
         env:
           pythonLocation: /opt/hostedtoolcache/Python/3.8.18/x64
           LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.8.18/x64/lib
