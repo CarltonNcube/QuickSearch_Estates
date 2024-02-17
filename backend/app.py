@@ -34,5 +34,5 @@ def signup():
 app.register_blueprint(property_bp)
 
 if __name__ == '__main__':
-    app.run(host='54.173.251.99', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
