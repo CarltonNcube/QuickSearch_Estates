@@ -49,9 +49,9 @@ jobs:
 
       - name: Copy necessary files to artifact directory
         run: |
-          cp -r backend artifacts/python-app/backend
+          cp -r backend/* artifacts/python-app/
           if [ -d "other_directory" ]; then
-            cp -r other_directory artifacts/python-app/other_directory
+            cp -r other_directory/* artifacts/python-app/other_directory/
           fi
 
       - name: Archive artifact
