@@ -43,7 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
           pip install pytest
-          
+
       - name: Create artifact directory
         run: mkdir -p artifacts/python-app
 
@@ -53,13 +53,13 @@ jobs:
           if [ -d "other_directory" ]; then
             cp -r other_directory artifacts/python-app/other_directory
           fi
-      
+
       - name: Archive artifact
         run: |
           cd artifacts
           tar -czf python-app.tar.gz python-app
           cd ..
-      
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4.3.1
         with:
@@ -73,8 +73,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-          allow-no-subscriptions: true
-          enable-AzPSSession: true
+          subscription-id: f82595b3-47a0-49a2-8e87-b1e0f2e2f999  # Specify your subscription ID here
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
@@ -82,7 +81,6 @@ jobs:
           app-name: QuickSearch_Estates
           slot-name: production
           package: artifacts/python-app.tar.gz
-          subscription-id: f82595b3-47a0-49a2-8e87-b1e0f2e2f999
         env:
           pythonLocation: /opt/hostedtoolcache/Python/3.8.18/x64
           LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.8.18/x64/lib
