@@ -2,7 +2,7 @@
 async function submitSignUpForm(formData) {
     try {
         // Send POST request to backend API endpoint for sign up
-        const response = await fetch('https://quicksearchestates.github.io/api/signup', {
+        const response = await fetch('https://www.krismaholdings.tech/api/signup', {
             method: 'POST',
             body: formData
         });
@@ -26,7 +26,7 @@ async function submitSignUpForm(formData) {
 async function searchProperties(formData) {
     try {
         // Send POST request to backend API endpoint for property search
-        const response = await fetch('https://quicksearchestates.github.io/api/properties/search', {
+        const response = await fetch('https://www.krismaholdings.tech/api/properties/search', {
             method: 'POST',
             body: formData
         });
