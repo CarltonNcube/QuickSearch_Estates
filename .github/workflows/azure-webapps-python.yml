@@ -78,8 +78,8 @@ jobs:
           environment: azurecloud
           auth-type: service-principal
         env:
-          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_URL }}
-          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ secrets.ACTIONS_ID_TOKEN_REQUEST_TOKEN }}
+          PRIVATE_KEY_1: ${{ secrets.PRIVATE_KEY_1 }}
+          PRIVATE_KEY_2: ${{ secrets.PRIVATE_KEY_2 }}
           AZURE_HTTP_USER_AGENT: GitHubActions
           pythonLocation: /opt/hostedtoolcache/Python/3.8.18/x64
           LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.8.18/x64/lib
