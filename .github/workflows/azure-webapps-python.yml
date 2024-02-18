@@ -76,7 +76,7 @@ jobs:
           allow-no-subscriptions: true
           enable-AzPSSession: false
           environment: azurecloud
-          auth-type: service-principal
+          auth-type: SERVICE_PRINCIPAL
         env:
           PRIVATE_KEY_1: ${{ secrets.PRIVATE_KEY_1 }}
           PRIVATE_KEY_2: ${{ secrets.PRIVATE_KEY_2 }}
