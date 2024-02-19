@@ -1,59 +1,86 @@
-// Simulated form submission function
-async function submitSignUpForm(formData) {
+// Function to handle user authentication
+async function signIn(email, password) {
     try {
-        // Send POST request to backend API endpoint for sign up
-        const response = await fetch('https://www.krismaholdings.tech/api/signup', {
+        const response = await fetch('https://www.krismaholdings.tech/api/signin', {
             method: 'POST',
-            body: formData
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
         });
 
-        // Check if request was successful
         if (response.ok) {
-            // Redirect user to dashboard or another page upon successful sign up
-            console.log('Sign up successful!');
+            const userData = await response.json();
+            // Store user data in localStorage or session storage for session management
+            // Example: localStorage.setItem('userData', JSON.stringify(userData));
+            console.log('User signed in:', userData);
+            return userData;
         } else {
-            // Display error message if sign up failed
             const errorMessage = await response.text();
-            console.error(errorMessage);
+            throw new Error(errorMessage);
         }
     } catch (error) {
-        // Handle any errors that occurred during the fetch operation
-        console.error('Error:', error);
+        console.error('Error signing in:', error.message);
+        throw error;
     }
 }
 
-// Simulated property search function
-async function searchProperties(formData) {
+// Function to handle property search
+async function searchProperties(searchQuery) {
     try {
-        // Send POST request to backend API endpoint for property search
+        const formData = new FormData();
+        formData.append('searchQuery', searchQuery);
+
         const response = await fetch('https://www.krismaholdings.tech/api/properties/search', {
             method: 'POST',
             body: formData
         });
 
-        // Check if request was successful
-        if (response.ok) {
-            // Parse response JSON
-            const properties = await response.json();
-
-            // Display search results on the page (e.g., populate a list with property details)
-            displaySearchResults(properties);
-        } else {
-            // Display error message if property search failed
-            const errorMessage = await response.text();
-            console.error(errorMessage);
+        if (!response.ok) {
+            throw new Error('Failed to search properties. Please try again.');
         }
+
+        const properties = await response.json();
+        displaySearchResults(properties);
+        displayPropertiesOnMap(properties);
     } catch (error) {
-        // Handle any errors that occurred during the fetch operation
-        console.error('Error:', error);
+        console.error('Error searching properties:', error.message);
     }
 }
 
-// Simulated function to display search results on the page
+// Function to display search results on the page
 function displaySearchResults(properties) {
-    // Implement logic to display search results (e.g., populate a list with property details)
-    console.log(properties);
+    const propertyList = document.getElementById('propertyList');
+    propertyList.innerHTML = ''; // Clear previous results
+
+    properties.forEach(property => {
+        const listItem = document.createElement('li');
+        listItem.textContent = property.address;
+        propertyList.appendChild(listItem);
+    });
 }
+
+// Function to display properties on a map using Leaflet
+function displayPropertiesOnMap(properties) {
+    const map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    properties.forEach(property => {
+        L.marker([property.latitude, property.longitude]).addTo(map)
+            .bindPopup(property.address)
+            .openPopup();
+    });
+}
+
+// Event listener for property search form submission
+document.getElementById('propertySearchForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+    const searchAddress = document.getElementById('searchAddress').value;
+    await searchProperties(searchAddress);
+});
 
 // Simulated form data
 const signUpFormData = new FormData();
