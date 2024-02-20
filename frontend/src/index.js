@@ -1,7 +1,7 @@
 // Function to handle user registration
 async function signUp(username, email, password) {
     try {
-        const response = await fetch('https://www.krismaholdings.tech/api/signup', {
+        const response = await fetch('/api/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ async function signUp(username, email, password) {
 // Function to list a property by a seller
 async function listProperty(propertyData) {
     try {
-        const response = await fetch('https://www.krismaholdings.tech/api/properties/list', {
+        const response = await fetch('/api/properties/list', {
             method: 'POST',
             body: propertyData
         });
@@ -45,8 +45,11 @@ async function listProperty(propertyData) {
 // Function to search properties with filters
 async function searchPropertiesWithFilters(filters) {
     try {
-        const response = await fetch('https://www.krismaholdings.tech/api/properties/search', {
+        const response = await fetch('/api/properties/search', {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(filters)
         });
 
@@ -65,8 +68,11 @@ async function searchPropertiesWithFilters(filters) {
 // Function to save a property as a favorite for a user
 async function saveFavoriteProperty(userId, propertyId) {
     try {
-        const response = await fetch(`https://www.krismaholdings.tech/api/users/${userId}/favorites`, {
+        const response = await fetch(`/api/users/${userId}/favorites`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ propertyId })
         });
 
