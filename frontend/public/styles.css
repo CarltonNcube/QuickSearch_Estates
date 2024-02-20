@@ -1,4 +1,10 @@
 /* Additional styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -6,12 +12,12 @@
 }
 
 .hero {
-    background-image: url('images/pexels-expect-best-323780.jpg');
+    background-image: url('../images/pexels-expect-best-323780.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
     text-align: center;
-    padding: 180px 20px; /* Reverted to previous padding */
+    padding: 180px 20px;
 }
 
 .hero h1 {
@@ -86,6 +92,7 @@ button:hover {
 /* Media query for mobile responsiveness */
 @media screen and (max-width: 768px) {
     .hero {
-        padding: 150px 20px; /* Adjusted padding for smaller screens */
+        padding: 150px 20px;
     }
 }
+
