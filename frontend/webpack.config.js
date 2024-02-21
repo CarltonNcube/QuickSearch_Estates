@@ -1,38 +1,44 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'development', // Set the mode to development
-  entry: './src/index.js', // The entry point of your application
+  mode: 'development',
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'), // The output directory for bundled files
-    filename: 'bundle.js', // The name of the bundled file
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
-  devtool: 'source-map', // Generate source maps for easier debugging
+  devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.js$/, // Apply babel-loader to transpile JavaScript files
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
         },
       },
       {
-        test: /\.css$/, // Process CSS files using style-loader and css-loader
+        test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ // Generate HTML file with bundled JavaScript injected
+    new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
     }),
-    new MiniCssExtractPlugin({ // Extract CSS into separate files
+    new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './public', to: './' }, // Copy all files from public directory to dist
+      ],
     }),
   ],
 };
