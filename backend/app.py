@@ -28,7 +28,7 @@ properties = [
     {
         "id": 3,
         "address": "789 Oak St",
-        "price": 400 000,
+        "price": 40000,
         "size": "3000 sqft",
         "location": "South Africa",
         "pictures": ["https://example.com/image5.jpg", "https://example.com/image6.jpg"],
