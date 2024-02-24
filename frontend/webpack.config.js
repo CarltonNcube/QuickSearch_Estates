@@ -5,10 +5,16 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    profile: './src/profile.js',
+    search: './src/search.js',
+    signin: './src/signin.js',
+    signup: './src/signup.js',
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
   },
   devtool: 'source-map',
   module: {
@@ -18,6 +24,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
         },
       },
       {
@@ -30,6 +39,27 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
+      chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/profile.html',
+      filename: 'profile.html',
+      chunks: ['profile'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/search.html',
+      filename: 'search.html',
+      chunks: ['search'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/signin.html',
+      filename: 'signin.html',
+      chunks: ['signin'],
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/signup.html',
+      filename: 'signup.html',
+      chunks: ['signup'],
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
