@@ -1,7 +1,7 @@
 // Function to handle user registration
 async function signUp(username, email, password) {
     try {
-        const response = await fetch('/api/signup', {
+        const response = await fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -10,9 +10,9 @@ async function signUp(username, email, password) {
         });
 
         if (response.ok) {
-            const userData = await response.json();
-            console.log('User signed up successfully:', userData);
-            return userData;
+            const newUser = await response.json();
+            console.log('User signed up successfully:', newUser);
+            return newUser;
         } else {
             const errorMessage = await response.text();
             throw new Error(errorMessage);
@@ -39,6 +39,7 @@ async function listProperty(propertyData) {
         console.log('Property listed successfully:', responseData);
     } catch (error) {
         console.error('Error listing property:', error.message);
+        throw error;
     }
 }
 
@@ -62,6 +63,7 @@ async function searchPropertiesWithFilters(filters) {
         displayPropertiesOnMap(properties);
     } catch (error) {
         console.error('Error searching properties:', error.message);
+        throw error;
     }
 }
 
@@ -83,6 +85,7 @@ async function saveFavoriteProperty(userId, propertyId) {
         console.log('Property saved as favorite successfully.');
     } catch (error) {
         console.error('Error saving property as favorite:', error.message);
+        throw error;
     }
 }
 

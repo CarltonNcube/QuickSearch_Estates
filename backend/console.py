@@ -2,8 +2,11 @@
 """Console for QuickSearch Estates - Buying and Selling Properties"""
 
 import cmd
+import requests
 from sqlalchemy.orm import sessionmaker
-from models import *
+from models.engine.fileStorage import FileStorage
+from models.engine.DBStorage import DBStorage
+from models.models import Base, engine, User, City, County, Province, State, Continent, Suburb, Property, Review, Amenity, Place, Preference
 
 # Define the classes dictionary
 classes = {
@@ -20,6 +23,10 @@ classes = {
     "Place": Place,
     "Preference": Preference
 }
+
+# Create session
+Session = sessionmaker(bind=engine)
+db_session = Session()
 
 class QuickSearchConsole(cmd.Cmd):
     """Command-line interface for QuickSearch Estates - Buying and Selling Properties"""
@@ -141,6 +148,50 @@ class QuickSearchConsole(cmd.Cmd):
         setattr(instance, attribute, value)
         db_session.commit()
         print(f"{attribute} updated successfully for {class_name} instance {instance_id}")
+
+    # Function to create a new user via HTTP POST request
+    def create_user(self, name, email):
+        user_data = {
+            "name": name,
+            "email": email
+        }
+        response = requests.post('http://localhost:5000/api/users', json=user_data)
+        if response.status_code == 201:
+            return response.json()
+        else:
+            return f"Failed to create user: {response.text}"
+
+    # Function to retrieve all users via HTTP GET request
+    def get_all_users(self):
+        response = requests.get('http://localhost:5000/api/users')
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return f"Failed to get users: {response.text}"
+
+    # Function to retrieve a user by ID via HTTP GET request
+    def get_user_by_id(self, user_id):
+        response = requests.get(f'http://localhost:5000/api/users/{user_id}')
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return f"Failed to get user: {response.text}"
+
+    # Function to update a user by ID via HTTP PUT request
+    def update_user(self, user_id, updated_data):
+        response = requests.put(f'http://localhost:5000/api/users/{user_id}', json=updated_data)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return f"Failed to update user: {response.text}"
+
+    # Function to delete a user by ID via HTTP DELETE request
+    def delete_user(self, user_id):
+        response = requests.delete(f'http://localhost:5000/api/users/{user_id}')
+        if response.status_code == 200:
+            return response.json()
+        else:
+            return f"Failed to delete user: {response.text}"
 
 if __name__ == '__main__':
     QuickSearchConsole().cmdloop()

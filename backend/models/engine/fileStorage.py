@@ -2,19 +2,10 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from models.base_model import Base
-from models.city import City
-from models.county import County
-from models.province import Province
-from models.state import State
-from models.country import Country
-from models.continent import Continent
-from models.suburb import Suburb
-from models.property import Property
-from models.review import Review
-from models.amenity import Amenity
-from models.place import Place
-from models.preference import Preference
+from models.models import (Base, User, City, County, Province, State,
+                           Continent, Suburb, Property, Review,
+                           Amenity, Place, Preference)
+
 
 class FileStorage:
     """File storage class for QuickSearch Estates."""
@@ -24,15 +15,12 @@ class FileStorage:
 
     def __init__(self):
         """Initialize FileStorage with MySQL database."""
-        # Amended to use MySQL instead of a JSON file
-        mysql_info = {
-            'host': '54.173.251.99',
-            'user': 'ubuntu',
-            'password': 'kris',
-            'database': 'quicksearch_estates'
-        }
-        self.__engine = create_engine(f"mysql://{mysql_info['user']}:{mysql_info['password']}
-                @{mysql_info['host']}/{mysql_info['database']}", echo=False)
+        mysql_info = {'host': '54.173.251.99', 'user': 'ubuntu',
+                      'password': 'kris', 'database': 'quicksearch_estates'}
+        self.__engine = create_engine(f"mysql://{mysql_info['user']}:"
+                                      f"{mysql_info['password']}@"
+                                      f"{mysql_info['host']}/"
+                                      f"{mysql_info['database']}", echo=False)
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine)
         self.__session = scoped_session(session_factory)
@@ -40,8 +28,8 @@ class FileStorage:
     def all(self, cls=None):
         """Query all objects of a given class."""
         objects = {}
-        classes = [User, City, County, Province, State, Continent, 
-                Suburb, Property, Review, Amenity, Place, Preference]
+        classes = [User, City, County, Province, State, Continent,
+                   Suburb, Property, Review, Amenity, Place, Preference]
         if cls:
             if cls in classes:
                 objects = {obj.id: obj for obj in self.__session.query(cls).all()}
@@ -71,3 +59,4 @@ class FileStorage:
     def close(self):
         """Close the session."""
         self.__session.close()
+
