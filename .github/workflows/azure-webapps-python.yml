@@ -46,6 +46,7 @@ jobs:
 
       - name: Run application script
         run: |
+          cd scripts
           chmod +x run_application.sh
           ./run_application.sh
 
