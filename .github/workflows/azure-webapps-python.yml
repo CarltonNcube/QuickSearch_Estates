@@ -44,30 +44,10 @@ jobs:
           pip install -r backend/requirements.txt
           pip install pytest
 
-      - name: Create artifact directory
-        run: mkdir -p artifacts/python-app
-
-      - name: Copy necessary files to artifact directory
+      - name: Run application script
         run: |
-          cp -r backend/* artifacts/python-app/
-          if [ -d "other_directory" ]; then
-            cp -r other_directory/* artifacts/python-app/other_directory/
-          fi
-
-      - name: Archive artifact
-        run: |
-          cd artifacts
-          tar -czf python-app.tar.gz python-app
-          cd ..
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.3.1
-        with:
-          name: python-app
-          path: artifacts/python-app.tar.gz
-          if-no-files-found: error
-          compression-level: 6
-          overwrite: false
+          chmod +x run_application.sh
+          ./run_application.sh
 
       - name: Azure login
         uses: azure/login@v1
