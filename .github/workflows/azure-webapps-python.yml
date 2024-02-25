@@ -17,7 +17,7 @@
 # For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
 
-name: Build and deploy Python app to Azure Web App
+name: Build and deploy Python app to Azure Web Application
 
 on:
   push:
@@ -46,9 +46,8 @@ jobs:
 
       - name: Run application script
         run: |
-          cd scripts
-          chmod +x run_application.sh
-          ./run_application.sh
+          chmod +x scripts/run_application.sh
+          ./scripts/run_application.sh
 
       - name: Azure login
         uses: azure/login@v1
